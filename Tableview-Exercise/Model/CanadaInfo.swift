@@ -36,4 +36,8 @@ class CanadaInfo {
       self.imageUrlString = imageUrlString
     }
   }
+  
+  deinit {
+    print("Canada Info deinitialized")
+  }
 }

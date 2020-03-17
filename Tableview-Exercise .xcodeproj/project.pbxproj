@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E719B5F12420B4E9000C6155 /* CanadaInfoTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E719B5F02420B4E9000C6155 /* CanadaInfoTestCase.swift */; };
+		E719B5F32420B725000C6155 /* DownloadImageUrlTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E719B5F22420B725000C6155 /* DownloadImageUrlTestCase.swift */; };
 		E7CE573D241F97CD00D0478A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE573C241F97CD00D0478A /* AppDelegate.swift */; };
 		E7CE573F241F97CD00D0478A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE573E241F97CD00D0478A /* SceneDelegate.swift */; };
 		E7CE5741241F97CD00D0478A /* CanadaDescriptionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5740241F97CD00D0478A /* CanadaDescriptionListViewController.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E719B5F02420B4E9000C6155 /* CanadaInfoTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadaInfoTestCase.swift; sourceTree = "<group>"; };
+		E719B5F22420B725000C6155 /* DownloadImageUrlTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadImageUrlTestCase.swift; sourceTree = "<group>"; };
 		E7CE5739241F97CD00D0478A /* Tableview-Exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tableview-Exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CE573C241F97CD00D0478A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7CE573E241F97CD00D0478A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,14 +115,6 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
-		E7CC65C2242092CF0011E11B /* Plist */ = {
-			isa = PBXGroup;
-			children = (
-				E7CE574A241F97CF00D0478A /* Info.plist */,
-			);
-			path = Plist;
-			sourceTree = "<group>";
-		};
 		E7CE5730241F97CD00D0478A = {
 			isa = PBXGroup;
 			children = (
@@ -142,7 +138,7 @@
 		E7CE573B241F97CD00D0478A /* Tableview-Exercise */ = {
 			isa = PBXGroup;
 			children = (
-				E7CC65C2242092CF0011E11B /* Plist */,
+				E7CE574A241F97CF00D0478A /* Info.plist */,
 				E7CC65C1242092B60011E11B /* Storyboard */,
 				E7CC65C02420929E0011E11B /* Asset */,
 				E7CC65BF242092830011E11B /* Delegates */,
@@ -161,6 +157,8 @@
 			children = (
 				E7CE5753241F97CF00D0478A /* Tableview_ExerciseTests.swift */,
 				E7CE5755241F97CF00D0478A /* Info.plist */,
+				E719B5F02420B4E9000C6155 /* CanadaInfoTestCase.swift */,
+				E719B5F22420B725000C6155 /* DownloadImageUrlTestCase.swift */,
 			);
 			path = "Tableview-ExerciseTests";
 			sourceTree = "<group>";
@@ -370,6 +368,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7CE5754241F97CF00D0478A /* Tableview_ExerciseTests.swift in Sources */,
+				E719B5F12420B4E9000C6155 /* CanadaInfoTestCase.swift in Sources */,
+				E719B5F32420B725000C6155 /* DownloadImageUrlTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UU7JG463S;
 				INFOPLIST_FILE = "Tableview-Exercise/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -547,6 +548,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7UU7JG463S;
 				INFOPLIST_FILE = "Tableview-Exercise/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

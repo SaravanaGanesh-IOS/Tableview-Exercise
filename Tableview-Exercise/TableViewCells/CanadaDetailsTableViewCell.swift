@@ -99,7 +99,10 @@ class CanadaDetailsTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     
     super.prepareForReuse()
+    
     self.imgViewCanadaIcon.image = nil
+    self.lblTitle.text = nil
+    self.lblDescription.text = nil
   }
   
 }

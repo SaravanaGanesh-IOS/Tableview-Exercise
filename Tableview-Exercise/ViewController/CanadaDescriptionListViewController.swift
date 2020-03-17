@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 class CanadaDescriptionListViewController: UIViewController {
   let tblViewDescriptionList = UITableView()
@@ -23,18 +24,21 @@ class CanadaDescriptionListViewController: UIViewController {
   }
   
   private lazy var activityIndicatorView: UIActivityIndicatorView = {
+    
     let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
     activityIndicator.color = .gray
     return activityIndicator
   }()
   
   private lazy var refreshControl: UIRefreshControl = {
+    
     let refreshControl = UIRefreshControl()
     refreshControl.tintColor = .gray
     refreshControl.addTarget(self, action: #selector(handlePullToRefresh), for: .valueChanged)
     return refreshControl
   }()
   
+  //View life cycle
   override func viewDidLoad() {
     
     super.viewDidLoad()
@@ -46,14 +50,20 @@ class CanadaDescriptionListViewController: UIViewController {
     // Do any additional setup after loading the view.
   }
   
+  //Activity aindicator alert view creation
   func activityIndicatorAlert() {
     let alert = UIAlertController(title: nil, message: "Loading data...", preferredStyle: .alert)
-    activityIndicatorView.style = .medium
+    if #available(iOS 13.0, *) {
+      activityIndicatorView.style = .medium
+    } else {
+      activityIndicatorView.style = .gray
+    }
     activityIndicatorView.startAnimating()
     alert.view.addSubview(activityIndicatorView)
     self.present(alert, animated: true, completion: nil)
   }
   
+  //Pull to refresh
   @objc
   func handlePullToRefresh() {
     DispatchQueue.main.async {
@@ -62,7 +72,13 @@ class CanadaDescriptionListViewController: UIViewController {
     }
   }
   
+  func checkForReachability() -> Bool {
+    let reachablity = network
+  }
+  
+  //Building view model for table view
   func getCanadaInfoViewModel() {
+    checkForReachablity()
     activityIndicatorAlert()
     DispatchQueue.global(qos: .default).async {
       
@@ -94,6 +110,7 @@ class CanadaDescriptionListViewController: UIViewController {
     self.navigationController?.navigationBar.prefersLargeTitles = true
   }
   
+  //Refresh control for table view
   func addRefreshControl() {
     
     refreshControl.sizeToFit()
@@ -108,6 +125,9 @@ class CanadaDescriptionListViewController: UIViewController {
     self.tblViewDescriptionList.delegate = self
     self.tblViewDescriptionList.dataSource = self
     
+    self.tblViewDescriptionList.separatorInset = .zero
+    self.tblViewDescriptionList.accessibilityIdentifier = "tableView--canadaInfoTableView"
+    
     self.addRefreshControl()
     
     self.tblViewDescriptionList.translatesAutoresizingMaskIntoConstraints = false
@@ -119,8 +139,13 @@ class CanadaDescriptionListViewController: UIViewController {
     //Register cell for the tableview
     self.tblViewDescriptionList.register(CanadaDetailsTableViewCell.self, forCellReuseIdentifier: kReuseCellId)
   }
+  
+  deinit {
+    print("CanadaDescription deinit")
+  }
 }
 
+//MARK - UITableViewDatasource
 extension CanadaDescriptionListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
@@ -130,6 +155,7 @@ extension CanadaDescriptionListViewController: UITableViewDataSource, UITableVie
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if let canadaDetailCell = tableView.dequeueReusableCell(withIdentifier: kReuseCellId) as? CanadaDetailsTableViewCell {
+      
       let canadaInfoModel = self.canadaInfoViewModel.canadaInfoViewModel[indexPath.row]
       canadaDetailCell.canadaInfo = canadaInfoModel
       return canadaDetailCell
