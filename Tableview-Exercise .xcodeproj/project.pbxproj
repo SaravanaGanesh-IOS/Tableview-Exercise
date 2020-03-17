@@ -9,12 +9,17 @@
 /* Begin PBXBuildFile section */
 		E7CE573D241F97CD00D0478A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE573C241F97CD00D0478A /* AppDelegate.swift */; };
 		E7CE573F241F97CD00D0478A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE573E241F97CD00D0478A /* SceneDelegate.swift */; };
-		E7CE5741241F97CD00D0478A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5740241F97CD00D0478A /* ViewController.swift */; };
-		E7CE5744241F97CD00D0478A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CE5742241F97CD00D0478A /* Main.storyboard */; };
+		E7CE5741241F97CD00D0478A /* CanadaDescriptionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5740241F97CD00D0478A /* CanadaDescriptionListViewController.swift */; };
 		E7CE5746241F97CF00D0478A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7CE5745241F97CF00D0478A /* Assets.xcassets */; };
 		E7CE5749241F97CF00D0478A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7CE5747241F97CF00D0478A /* LaunchScreen.storyboard */; };
 		E7CE5754241F97CF00D0478A /* Tableview_ExerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5753241F97CF00D0478A /* Tableview_ExerciseTests.swift */; };
 		E7CE575F241F97CF00D0478A /* Tableview_ExerciseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE575E241F97CF00D0478A /* Tableview_ExerciseUITests.swift */; };
+		E7CE576F241FAA6C00D0478A /* CanadaDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE576E241FAA6C00D0478A /* CanadaDetailsTableViewCell.swift */; };
+		E7CE5773241FE8B200D0478A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5772241FE8B200D0478A /* Constants.swift */; };
+		E7CE5775241FE99500D0478A /* CanadaDetailsAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5774241FE99500D0478A /* CanadaDetailsAPICalls.swift */; };
+		E7CE5778241FF4A400D0478A /* CanadaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE5777241FF4A400D0478A /* CanadaInfo.swift */; };
+		E7CE577B241FFFC900D0478A /* CanadaInfoListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE577A241FFFC900D0478A /* CanadaInfoListViewModel.swift */; };
+		E7CE577D2420086A00D0478A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CE577C2420086A00D0478A /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +43,7 @@
 		E7CE5739241F97CD00D0478A /* Tableview-Exercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tableview-Exercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CE573C241F97CD00D0478A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7CE573E241F97CD00D0478A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E7CE5740241F97CD00D0478A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E7CE5743241F97CD00D0478A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E7CE5740241F97CD00D0478A /* CanadaDescriptionListViewController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CanadaDescriptionListViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		E7CE5745241F97CF00D0478A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7CE5748241F97CF00D0478A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7CE574A241F97CF00D0478A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +53,12 @@
 		E7CE575A241F97CF00D0478A /* Tableview-ExerciseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tableview-ExerciseUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7CE575E241F97CF00D0478A /* Tableview_ExerciseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tableview_ExerciseUITests.swift; sourceTree = "<group>"; };
 		E7CE5760241F97CF00D0478A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7CE576E241FAA6C00D0478A /* CanadaDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadaDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		E7CE5772241FE8B200D0478A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E7CE5774241FE99500D0478A /* CanadaDetailsAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadaDetailsAPICalls.swift; sourceTree = "<group>"; };
+		E7CE5777241FF4A400D0478A /* CanadaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadaInfo.swift; sourceTree = "<group>"; };
+		E7CE577A241FFFC900D0478A /* CanadaInfoListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanadaInfoListViewModel.swift; sourceTree = "<group>"; };
+		E7CE577C2420086A00D0478A /* Extension.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +109,14 @@
 		E7CE573B241F97CD00D0478A /* Tableview-Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				E7CE5779241FFF9A00D0478A /* ViewModels */,
+				E7CE5776241FF47600D0478A /* Model */,
+				E7CE5771241FE86700D0478A /* Common */,
+				E7CE5770241FE7A800D0478A /* APICall */,
+				E7CE576D241FAA4500D0478A /* TableViewCells */,
+				E7CE576C241FA24000D0478A /* ViewController */,
 				E7CE573C241F97CD00D0478A /* AppDelegate.swift */,
 				E7CE573E241F97CD00D0478A /* SceneDelegate.swift */,
-				E7CE5740241F97CD00D0478A /* ViewController.swift */,
-				E7CE5742241F97CD00D0478A /* Main.storyboard */,
 				E7CE5745241F97CF00D0478A /* Assets.xcassets */,
 				E7CE5747241F97CF00D0478A /* LaunchScreen.storyboard */,
 				E7CE574A241F97CF00D0478A /* Info.plist */,
@@ -126,6 +140,55 @@
 				E7CE5760241F97CF00D0478A /* Info.plist */,
 			);
 			path = "Tableview-ExerciseUITests";
+			sourceTree = "<group>";
+		};
+		E7CE576C241FA24000D0478A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE5740241F97CD00D0478A /* CanadaDescriptionListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E7CE576D241FAA4500D0478A /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE576E241FAA6C00D0478A /* CanadaDetailsTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		E7CE5770241FE7A800D0478A /* APICall */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE5774241FE99500D0478A /* CanadaDetailsAPICalls.swift */,
+			);
+			path = APICall;
+			sourceTree = "<group>";
+		};
+		E7CE5771241FE86700D0478A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE5772241FE8B200D0478A /* Constants.swift */,
+				E7CE577C2420086A00D0478A /* Extension.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E7CE5776241FF47600D0478A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE5777241FF4A400D0478A /* CanadaInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E7CE5779241FFF9A00D0478A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E7CE577A241FFFC900D0478A /* CanadaInfoListViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +270,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E7CE5734241F97CD00D0478A /* Build configuration list for PBXProject "Tableview-Exercise" */;
+			buildConfigurationList = E7CE5734241F97CD00D0478A /* Build configuration list for PBXProject "Tableview-Exercise " */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -234,7 +297,6 @@
 			files = (
 				E7CE5749241F97CF00D0478A /* LaunchScreen.storyboard in Resources */,
 				E7CE5746241F97CF00D0478A /* Assets.xcassets in Resources */,
-				E7CE5744241F97CD00D0478A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +321,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7CE5741241F97CD00D0478A /* ViewController.swift in Sources */,
+				E7CE577D2420086A00D0478A /* Extension.swift in Sources */,
+				E7CE5773241FE8B200D0478A /* Constants.swift in Sources */,
+				E7CE5775241FE99500D0478A /* CanadaDetailsAPICalls.swift in Sources */,
+				E7CE576F241FAA6C00D0478A /* CanadaDetailsTableViewCell.swift in Sources */,
+				E7CE5778241FF4A400D0478A /* CanadaInfo.swift in Sources */,
+				E7CE577B241FFFC900D0478A /* CanadaInfoListViewModel.swift in Sources */,
+				E7CE5741241F97CD00D0478A /* CanadaDescriptionListViewController.swift in Sources */,
 				E7CE573D241F97CD00D0478A /* AppDelegate.swift in Sources */,
 				E7CE573F241F97CD00D0478A /* SceneDelegate.swift in Sources */,
 			);
@@ -297,14 +365,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E7CE5742241F97CD00D0478A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E7CE5743241F97CD00D0478A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E7CE5747241F97CF00D0478A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -553,7 +613,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E7CE5734241F97CD00D0478A /* Build configuration list for PBXProject "Tableview-Exercise" */ = {
+		E7CE5734241F97CD00D0478A /* Build configuration list for PBXProject "Tableview-Exercise " */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E7CE5761241F97CF00D0478A /* Debug */,
