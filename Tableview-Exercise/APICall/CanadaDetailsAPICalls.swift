@@ -12,9 +12,14 @@ class CanadaDetailsAPICalls: NSObject {
   
   static let sharedInstance = CanadaDetailsAPICalls()
   
+  
+  
+  /// Getting get canada info details from the Url using URLSession
+  /// BaseURL - https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json
+  /// - Parameter completionHandler: returns Dictionary
+  
   func getCanadaInfo(completionHandler: @escaping (NSMutableDictionary) -> ()) {
     //Setting up URL Request
-    //BaseURL - https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json
     var canadaInfoArray = [CanadaInfo]()
     let canadaJsonDictionary = NSMutableDictionary()
     guard let url = URL(string: Constants.baseUrl) else {

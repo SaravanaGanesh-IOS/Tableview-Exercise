@@ -13,5 +13,5 @@ struct Constants {
   
   static let baseUrl = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
   static let padding:CGFloat = 10
-  static let height:CGFloat = 55
+  static let height:CGFloat = 60
 }

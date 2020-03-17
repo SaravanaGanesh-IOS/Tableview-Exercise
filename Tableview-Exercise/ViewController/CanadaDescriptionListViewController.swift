@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SystemConfiguration
+import Reachability
 
 class CanadaDescriptionListViewController: UIViewController {
   let tblViewDescriptionList = UITableView()
@@ -43,8 +43,8 @@ class CanadaDescriptionListViewController: UIViewController {
     
     super.viewDidLoad()
     
-    //Setting up the table view
     self.getCanadaInfoViewModel()
+    //Setting up the table view
     self.tableViewCreation()
     self.navigationBarSetup()
     // Do any additional setup after loading the view.
@@ -72,35 +72,62 @@ class CanadaDescriptionListViewController: UIViewController {
     }
   }
   
-  func checkForReachability() -> Bool {
-    let reachablity = network
+  func removeDataSourceAsNoNetwork() {
+    self.tblViewDescriptionList.dataSource = nil
+    self.tblViewDescriptionList.delegate = nil
+    self.tblViewDescriptionList.isHidden = true
+    
+    let labelNoNetwork = UILabel()
+    self.view.backgroundColor = .white
+    self.view.addSubview(labelNoNetwork)
+    
+    labelNoNetwork.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
+    labelNoNetwork.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+    labelNoNetwork.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+    labelNoNetwork.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    labelNoNetwork.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+    labelNoNetwork.text = "No network available please check your internet connection and try again"
+    
+    labelNoNetwork.translatesAutoresizingMaskIntoConstraints = false
+    
+    labelNoNetwork.textColor = .black
+    labelNoNetwork.numberOfLines = 0
+    labelNoNetwork.lineBreakMode = .byWordWrapping
+    labelNoNetwork.font = UIFont.preferredFont(forTextStyle: .body)
+    labelNoNetwork.textAlignment = .center
   }
   
   //Building view model for table view
   func getCanadaInfoViewModel() {
-    checkForReachablity()
     activityIndicatorAlert()
-    DispatchQueue.global(qos: .default).async {
-      
-      CanadaDetailsAPICalls.sharedInstance.getCanadaInfo { (jsonDict) in
+    if (self.checkForReachability()) {
+      DispatchQueue.global(qos: .default).async {
         
-        DispatchQueue.main.async {
-          if let title = jsonDict.value(forKey: "canadaTitle") as? String {
-            self.navigationItem.title = title
-          }
-        }
-        
-        if let canadaInfoListJson = jsonDict.value(forKey: "canadaList") as? [CanadaInfo] {
-          let canadaInfoList = canadaInfoListJson.compactMap { canadaInfo in
-            return CanadaInfoViewModel(canadaInfo: canadaInfo)
+        CanadaDetailsAPICalls.sharedInstance.getCanadaInfo { (jsonDict) in
+          
+          DispatchQueue.main.async {
+            if let title = jsonDict.value(forKey: "canadaTitle") as? String {
+              self.navigationItem.title = title
+            }
           }
           
-          self.canadaInfoViewModel = CanadaInfoListViewModel(canadaInfoList: canadaInfoList)
-          DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
+          if let canadaInfoListJson = jsonDict.value(forKey: "canadaList") as? [CanadaInfo] {
+            let canadaInfoList = canadaInfoListJson.compactMap { canadaInfo in
+              return CanadaInfoViewModel(canadaInfo: canadaInfo)
+            }
+            
+            self.canadaInfoViewModel = CanadaInfoListViewModel(canadaInfoList: canadaInfoList)
+            DispatchQueue.main.async {
+              self.dismiss(animated: true, completion: nil)
+            }
           }
         }
       }
+    } else {
+      DispatchQueue.main.async {
+        self.dismiss(animated: true, completion: nil)
+      }
+      self.removeDataSourceAsNoNetwork()
     }
   }
   
@@ -122,11 +149,12 @@ class CanadaDescriptionListViewController: UIViewController {
     
     self.view.addSubview(self.tblViewDescriptionList)
     
-    self.tblViewDescriptionList.delegate = self
-    self.tblViewDescriptionList.dataSource = self
-    
     self.tblViewDescriptionList.separatorInset = .zero
     self.tblViewDescriptionList.accessibilityIdentifier = "tableView--canadaInfoTableView"
+    
+    self.tblViewDescriptionList.delegate = self
+    self.tblViewDescriptionList.dataSource = self
+    self.tblViewDescriptionList.estimatedRowHeight = 80
     
     self.addRefreshControl()
     
@@ -140,12 +168,13 @@ class CanadaDescriptionListViewController: UIViewController {
     self.tblViewDescriptionList.register(CanadaDetailsTableViewCell.self, forCellReuseIdentifier: kReuseCellId)
   }
   
+  //Deinitilizing view controller
   deinit {
     print("CanadaDescription deinit")
   }
 }
 
-//MARK - UITableViewDatasource
+//MARK - UITableViewDatasource, Delegate functions
 extension CanadaDescriptionListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     

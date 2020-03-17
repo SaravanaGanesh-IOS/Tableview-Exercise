@@ -16,6 +16,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
       
       self.lblDescription.text = canadaInfo?.description
       self.lblTitle.text = canadaInfo?.title
+      
       DispatchQueue.global(qos: .background).async {
         if let imageUrlString = self.canadaInfo?.imageUrlString {
           self.imgViewCanadaIcon.loadImageWithCache(for: imageUrlString)
@@ -23,13 +24,15 @@ class CanadaDetailsTableViewCell: UITableViewCell {
       }
       
       if self.lblTitle.text == "" || self.lblDescription.text == "" {
-        
-        self.imgViewCanadaIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-        self.imgViewCanadaIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+
+        self.imgViewCanadaIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.padding).isActive = true
+        self.imgViewCanadaIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constants.padding).isActive = true
+        self.imgViewCanadaIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = false
       } else {
-        
-        self.imgViewCanadaIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = false
-        self.imgViewCanadaIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = false
+
+        self.imgViewCanadaIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.padding).isActive = false
+        self.imgViewCanadaIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constants.padding).isActive = false
+        self.imgViewCanadaIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
       }
     }
   }
@@ -65,6 +68,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
     return lblDescription
   }()
   
+  //Initilizing UITableViewCells
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,8 +85,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
     self.lblDescription.leadingAnchor.constraint(equalTo: self.imgViewCanadaIcon.trailingAnchor, constant: Constants.padding).isActive = true
     self.lblDescription.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constants.padding).isActive = true
     self.lblDescription.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constants.padding).isActive = true
-    
-    self.imgViewCanadaIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+
     self.imgViewCanadaIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.padding).isActive = true
     self.imgViewCanadaIcon.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
     

@@ -14,6 +14,12 @@ class CanadaInfo {
   var description: String
   var imageUrlString: String
   
+  
+  /// Initilizing with title, description, imageUrlString for model class
+  /// - Parameters:
+  ///   - title: "Canada"
+  ///   - description: "canada is the one of the best countries"
+  ///   - imageUrlString: "http://12213ewqe3.jpg"
   init(title: String, description: String, imageUrlString: String) {
     self.title = title
     self.description = description

@@ -8,11 +8,15 @@
 
 import Foundation
 import UIKit
+import Reachability
 
+//Initilizing cache for images
 let imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
   
+  /// loading image from url and adding image to NSCache and loading it to image view in the cell
+  /// - Parameter urlString: urlString - "http://1239f9euf.jpg"
   func loadImageWithCache(for urlString: String) {
     
     DispatchQueue.main.async {
@@ -46,6 +50,9 @@ extension UIImageView {
     }.resume()
   }
   
+  
+  /// Imageview rounded
+  /// - Parameter withBorder: withBorder - Bool
   func rounded(withBorder: Bool) {
     
     self.clipsToBounds = true
@@ -56,5 +63,29 @@ extension UIImageView {
     } else {
       self.layer.borderWidth = 0.0
     }
+  }
+}
+
+extension UIViewController {
+  
+  /// Check for network reachability of device
+  func checkForReachability() -> Bool {
+    var isReachable = false
+    let reachablity = try? Reachability()
+    
+    if reachablity?.connection == .wifi {
+      isReachable = true
+    } else if reachablity?.connection == .cellular {
+      isReachable = true
+    } else {
+      isReachable = false
+    }
+    
+    do {
+      try reachablity?.startNotifier()
+    } catch {
+      print("Error while start notify for reachability")
+    }
+    return isReachable
   }
 }

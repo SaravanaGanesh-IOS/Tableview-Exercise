@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "D8D4C863-CFC9-4A6E-8BA5-9F2D57182B3D"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "836657C3-B184-475C-B153-9EB586DA69A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tableview-Exercise/ViewController/CanadaDescriptionListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "getCanadaInfoViewModel()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "836657C3-B184-475C-B153-9EB586DA69A5 - d253fd22eaadaff3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Tableview_Exercise.CanadaDescriptionListViewController.getCanadaInfoViewModel() -&gt; ()"
+                  moduleName = "Tableview-Exercise"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patricphinehasraj/Documents/Saravana-IOS/Tableview-Exercise/Tableview-Exercise/ViewController/CanadaDescriptionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "121"
+                  endingLineNumber = "121"
+                  offsetFromSymbolStart = "30">
+               </Location>
+               <Location
+                  uuid = "836657C3-B184-475C-B153-9EB586DA69A5 - c0c9f29e8f003fc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.NSMutableDictionary) -&gt; () in closure #1 () -&gt; () in Tableview_Exercise.CanadaDescriptionListViewController.getCanadaInfoViewModel() -&gt; ()"
+                  moduleName = "Tableview-Exercise"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/patricphinehasraj/Documents/Saravana-IOS/Tableview-Exercise/Tableview-Exercise/ViewController/CanadaDescriptionListViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "123"
+                  endingLineNumber = "123"
+                  offsetFromSymbolStart = "258">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D69FF4A8-123E-4CB4-9B76-F89005E5AD0B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tableview-Exercise/Common/Extension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "checkForReachability()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36484C3E-25B3-4C2E-A25A-959AE15E7DAA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tableview-Exercise/ViewController/CanadaDescriptionListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "removeDataSourceAsNoNetwork()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
