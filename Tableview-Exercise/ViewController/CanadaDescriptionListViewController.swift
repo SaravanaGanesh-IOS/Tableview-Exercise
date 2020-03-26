@@ -78,8 +78,6 @@ class CanadaDescriptionListViewController: UIViewController {
   
   func removeDataSourceAsNoNetwork() {
     //Adding refresh button to refresh once network is connected
-    let refreshButton = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(handlePullToRefresh))
-    self.navigationItem.rightBarButtonItem = refreshButton
     
     self.tblViewDescriptionList.dataSource = nil
     self.tblViewDescriptionList.delegate = nil
@@ -88,7 +86,8 @@ class CanadaDescriptionListViewController: UIViewController {
     let labelNoNetwork = UILabel()
     self.view.backgroundColor = .white
     self.view.addSubview(labelNoNetwork)
-    
+
+    labelNoNetwork.tag = 100
     labelNoNetwork.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
     labelNoNetwork.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
     labelNoNetwork.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
@@ -108,9 +107,9 @@ class CanadaDescriptionListViewController: UIViewController {
   //Building view model for table view
   func getCanadaInfoViewModel() {
     activityIndicatorAlert()
-    self.navigationItem.rightBarButtonItem = nil
+//    self.navigationItem.rightBarButtonItem = nil
     if (self.checkForReachability()) {
-      self.addRefreshControl()
+      
       self.canadaInfoViewModel.fetchCanadaDetailData { [weak self]result in
         DispatchQueue.main.async { [weak self] in
           
@@ -118,6 +117,10 @@ class CanadaDescriptionListViewController: UIViewController {
           self.updateUI()
           self.dismiss(animated: true, completion: nil)
           self.navigationItem.title = self.canadaInfoViewModel.title
+          if let label = self.view.viewWithTag(100) as? UILabel {
+            label.removeFromSuperview()
+          }
+          self.navigationItem.rightBarButtonItem = nil
         }
       }
     } else {
@@ -132,6 +135,9 @@ class CanadaDescriptionListViewController: UIViewController {
   }
   
   func updateUI() {
+    self.tblViewDescriptionList.delegate = self
+    self.tblViewDescriptionList.dataSource = self
+    self.tblViewDescriptionList.isHidden = false
     self.tblViewDescriptionList.reloadData()
   }
   
@@ -139,6 +145,9 @@ class CanadaDescriptionListViewController: UIViewController {
     
     self.navigationController?.navigationBar.backgroundColor = .white
     self.navigationController?.navigationBar.prefersLargeTitles = true
+    
+    let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(handlePullToRefresh))
+    self.navigationItem.rightBarButtonItem = refreshButton
   }
   
   //Refresh control for table view
