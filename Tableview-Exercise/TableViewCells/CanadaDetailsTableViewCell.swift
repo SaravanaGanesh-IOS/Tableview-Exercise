@@ -10,20 +10,21 @@ import UIKit
 
 class CanadaDetailsTableViewCell: UITableViewCell {
   
-  var canadaInfo: CanadaInfoViewModel? {
+  var canadaInfo: CanadaInfo? {
     
     didSet {
       
       self.lblDescription.text = canadaInfo?.description
       self.lblTitle.text = canadaInfo?.title
       
-      DispatchQueue.global(qos: .background).async {
+      DispatchQueue.global(qos: .background).async { [weak self] in
+        guard let self = self else { return }
         if let imageUrlString = self.canadaInfo?.imageUrlString {
           self.imgViewCanadaIcon.loadImageWithCache(for: imageUrlString)
         }
       }
       
-      if self.lblTitle.text == "" || self.lblDescription.text == "" {
+      if self.lblTitle.text == nil || self.lblDescription.text == nil {
 
         self.imgViewCanadaIcon.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.padding).isActive = true
         self.imgViewCanadaIcon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Constants.padding).isActive = true
@@ -42,6 +43,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
     let imgViewIcon = UIImageView()
     imgViewIcon.contentMode = .scaleToFill
     imgViewIcon.translatesAutoresizingMaskIntoConstraints = false
+    imgViewIcon.image = UIImage(named: "defaultImage")
     
     return imgViewIcon
   }()
@@ -75,6 +77,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
     addSubview(self.lblTitle)
     addSubview(self.lblDescription)
     addSubview(self.imgViewCanadaIcon)
+    self.selectionStyle = .none
     
     self.lblTitle.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.padding).isActive = true
     self.lblTitle.leadingAnchor.constraint(equalTo: self.imgViewCanadaIcon.trailingAnchor, constant: Constants.padding).isActive = true
@@ -103,7 +106,7 @@ class CanadaDetailsTableViewCell: UITableViewCell {
     
     super.prepareForReuse()
     
-    self.imgViewCanadaIcon.image = nil
+    self.imgViewCanadaIcon.image = UIImage(named: "defaultImage")
     self.lblTitle.text = nil
     self.lblDescription.text = nil
   }

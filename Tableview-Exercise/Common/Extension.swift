@@ -19,14 +19,16 @@ extension UIImageView {
   /// - Parameter urlString: urlString - "http://1239f9euf.jpg"
   func loadImageWithCache(for urlString: String) {
     
-    DispatchQueue.main.async {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
       self.image = UIImage(named: "defaultImage")
     }
     
     guard let url = URL(string: urlString) else { return }
     
     if let cachedImage = imageCache.object(forKey: urlString as AnyObject) {
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [weak self] in
+        guard let self = self else { return }
         self.image = cachedImage as? UIImage
       }
       return
@@ -42,7 +44,8 @@ extension UIImageView {
       
       if let image = UIImage(data: data) {
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+          guard let self = self else { return }
           imageCache.setObject(image, forKey: urlString as AnyObject)
           self.image = image
         }

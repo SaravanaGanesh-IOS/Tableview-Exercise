@@ -10,24 +10,26 @@ import XCTest
 @testable import Tableview_Exercise
 
 class CanadaInfoTestCase: XCTestCase {
-  var meeseCanadaInfo: CanadaInfo!
-  var ehCanadaInfo: CanadaInfo!
-  var spaceProgramCanadaInfo:CanadaInfo!
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-      meeseCanadaInfo = CanadaInfo(title: "Meese", description: "", imageUrlString: "http://carldeckerwildlifeartstudio.net/wp-content/uploads/2011/04/IMG_2418%20majestiv%20moose%201%20copy%20(small)-96x96,jpg")
-      ehCanadaInfo = CanadaInfo(title: "Eh", description: "A chiefly canadian interrogative iutterance, usually expressing surprise or doubt or seeking confirmation", imageUrlString: "")
-      spaceProgramCanadaInfo = CanadaInfo(title: "Housing", description: "", imageUrlString: "http://icons.iconarchive.com.icons/iconshock/alaska/256/Igloo-icon.png")
-    }
+        // Put setup code here. This method is called before the invocation of each test method in the class
+      let json = """
+                {
+                  "title" : "country",
+                  "description" : "india",
+                  "imageHref" : "http://india.jpg"
+                }
+      """.data(using: .utf8)!
+      
+      let canadaInfoTest = try! JSONDecoder().decode(CanadaInfo.self, from: json)
+      
+      XCTAssertEqual(canadaInfoTest.title, "country")
+  }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
       
       super.tearDown()
-      meeseCanadaInfo = nil
-      ehCanadaInfo = nil
-      spaceProgramCanadaInfo = nil
     }
 
     func testExample() {

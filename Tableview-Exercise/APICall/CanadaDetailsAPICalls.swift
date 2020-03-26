@@ -8,21 +8,24 @@
 
 import UIKit
 
-class CanadaDetailsAPICalls: NSObject {
+final class CanadaDetailsAPICalls: NSObject {
   
   static let sharedInstance = CanadaDetailsAPICalls()
+  private override init() { }
   
-  
+  enum HTTPError: Error {
+    case invalidUrl
+    case invalidResponse(Data?, URLResponse?)
+  }
   
   /// Getting get canada info details from the Url using URLSession
   /// BaseURL - https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json
   /// - Parameter completionHandler: returns Dictionary
   
-  func getCanadaInfo(completionHandler: @escaping (NSMutableDictionary) -> ()) {
+  func getCanadaInfo(completionHandler: @escaping (Result<Data, Error>) -> Void) {
     //Setting up URL Request
-    var canadaInfoArray = [CanadaInfo]()
-    let canadaJsonDictionary = NSMutableDictionary()
     guard let url = URL(string: Constants.baseUrl) else {
+      completionHandler(.failure(HTTPError.invalidUrl))
       return
     }
     
@@ -36,33 +39,23 @@ class CanadaDetailsAPICalls: NSObject {
     
     //Make request
     session.dataTask(with: urlRequest) { (data, response, error) in
+      guard error == nil else {
+        completionHandler(.failure(error!))
+        return
+      }
       guard let data = data else { return }
       
       guard let dataString = String(data: data, encoding: .isoLatin1) else { return }
       
-      guard let jsonData = dataString.data(using: .utf8) else { return }
+      guard let jsonData = dataString.data(using: .utf8),
+        let httpResponse = response as? HTTPURLResponse,
+        200 ..< 300 ~= httpResponse.statusCode else {
+          completionHandler(.failure(HTTPError.invalidResponse(data, response)))
+          return
+      }
       
-      do {
-        if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? NSDictionary {
-          
-          if let canadaInfoList = json["rows"] as? [NSDictionary] {
-            canadaInfoArray = canadaInfoList.compactMap { dict in
-              return CanadaInfo(dictionary: dict)
-            }
-            canadaJsonDictionary.setValue(canadaInfoArray, forKey: "canadaList")
-          }
-          if let canadaInfoTitle = json["title"] as? String {
-            canadaJsonDictionary.setValue(canadaInfoTitle, forKey: "canadaTitle")
-          }
-        }
-        
-        DispatchQueue.main.async {
-          completionHandler(canadaJsonDictionary)
-        }
-        
-      } catch {
-        print(error.localizedDescription)
-        return
+      DispatchQueue.main.async {
+        completionHandler(.success(jsonData))
       }
     }.resume()
   }

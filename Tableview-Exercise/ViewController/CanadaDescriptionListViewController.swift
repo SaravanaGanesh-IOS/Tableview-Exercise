@@ -17,7 +17,9 @@ class CanadaDescriptionListViewController: UIViewController {
     
     didSet {
       
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [weak self] in
+        
+        guard let self = self else { return }
         self.tblViewDescriptionList.reloadData()
       }
     }
@@ -66,13 +68,19 @@ class CanadaDescriptionListViewController: UIViewController {
   //Pull to refresh
   @objc
   func handlePullToRefresh() {
-    DispatchQueue.main.async {
-      self.tblViewDescriptionList.reloadData()
+    self.getCanadaInfoViewModel()
+    DispatchQueue.main.async { [weak self] in
+      
+      guard let self = self else { return }
       self.refreshControl.endRefreshing()
     }
   }
   
   func removeDataSourceAsNoNetwork() {
+    //Adding refresh button to refresh once network is connected
+    let refreshButton = UIBarButtonItem.init(barButtonSystemItem: .refresh, target: self, action: #selector(handlePullToRefresh))
+    self.navigationItem.rightBarButtonItem = refreshButton
+    
     self.tblViewDescriptionList.dataSource = nil
     self.tblViewDescriptionList.delegate = nil
     self.tblViewDescriptionList.isHidden = true
@@ -100,35 +108,31 @@ class CanadaDescriptionListViewController: UIViewController {
   //Building view model for table view
   func getCanadaInfoViewModel() {
     activityIndicatorAlert()
+    self.navigationItem.rightBarButtonItem = nil
     if (self.checkForReachability()) {
-      DispatchQueue.global(qos: .default).async {
-        
-        CanadaDetailsAPICalls.sharedInstance.getCanadaInfo { (jsonDict) in
+      self.addRefreshControl()
+      self.canadaInfoViewModel.fetchCanadaDetailData { [weak self]result in
+        DispatchQueue.main.async { [weak self] in
           
-          DispatchQueue.main.async {
-            if let title = jsonDict.value(forKey: "canadaTitle") as? String {
-              self.navigationItem.title = title
-            }
-          }
-          
-          if let canadaInfoListJson = jsonDict.value(forKey: "canadaList") as? [CanadaInfo] {
-            let canadaInfoList = canadaInfoListJson.compactMap { canadaInfo in
-              return CanadaInfoViewModel(canadaInfo: canadaInfo)
-            }
-            
-            self.canadaInfoViewModel = CanadaInfoListViewModel(canadaInfoList: canadaInfoList)
-            DispatchQueue.main.async {
-              self.dismiss(animated: true, completion: nil)
-            }
-          }
+          guard let self = self else { return }
+          self.updateUI()
+          self.dismiss(animated: true, completion: nil)
+          self.navigationItem.title = self.canadaInfoViewModel.title
         }
       }
     } else {
-      DispatchQueue.main.async {
+      DispatchQueue.main.async { [weak self] in
+        
+        guard let self = self else { return }
+        self.removeDataSourceAsNoNetwork()
         self.dismiss(animated: true, completion: nil)
+        self.navigationItem.title = self.canadaInfoViewModel.title
       }
-      self.removeDataSourceAsNoNetwork()
     }
+  }
+  
+  func updateUI() {
+    self.tblViewDescriptionList.reloadData()
   }
   
   func navigationBarSetup() {
@@ -141,7 +145,6 @@ class CanadaDescriptionListViewController: UIViewController {
   func addRefreshControl() {
     
     refreshControl.sizeToFit()
-    
     self.tblViewDescriptionList.refreshControl = refreshControl
   }
   
@@ -178,14 +181,14 @@ class CanadaDescriptionListViewController: UIViewController {
 extension CanadaDescriptionListViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return canadaInfoViewModel.canadaInfoViewModel.count
+    return canadaInfoViewModel.rows.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if let canadaDetailCell = tableView.dequeueReusableCell(withIdentifier: kReuseCellId) as? CanadaDetailsTableViewCell {
       
-      let canadaInfoModel = self.canadaInfoViewModel.canadaInfoViewModel[indexPath.row]
+      let canadaInfoModel = self.canadaInfoViewModel.rows[indexPath.row]
       canadaDetailCell.canadaInfo = canadaInfoModel
       return canadaDetailCell
     }
