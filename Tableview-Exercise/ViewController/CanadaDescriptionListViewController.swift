@@ -40,6 +40,23 @@ class CanadaDescriptionListViewController: UIViewController {
     return refreshControl
   }()
   
+  private lazy var labelNoNetwork: UILabel = {
+    
+    let labelNoNetwork = UILabel()
+
+    labelNoNetwork.tag = 100
+    labelNoNetwork.text = "No network available please check your internet connection and try again"
+    
+    labelNoNetwork.translatesAutoresizingMaskIntoConstraints = false
+    
+    labelNoNetwork.textColor = .black
+    labelNoNetwork.numberOfLines = 0
+    labelNoNetwork.lineBreakMode = .byWordWrapping
+    labelNoNetwork.font = UIFont.preferredFont(forTextStyle: .body)
+    labelNoNetwork.textAlignment = .center
+    return labelNoNetwork
+  }()
+  
   //View life cycle
   override func viewDidLoad() {
     
@@ -83,32 +100,20 @@ class CanadaDescriptionListViewController: UIViewController {
     self.tblViewDescriptionList.delegate = nil
     self.tblViewDescriptionList.isHidden = true
     
-    let labelNoNetwork = UILabel()
     self.view.backgroundColor = .white
     self.view.addSubview(labelNoNetwork)
-
-    labelNoNetwork.tag = 100
+    
     labelNoNetwork.heightAnchor.constraint(equalToConstant: Constants.height).isActive = true
     labelNoNetwork.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
     labelNoNetwork.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
     labelNoNetwork.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
     labelNoNetwork.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-    labelNoNetwork.text = "No network available please check your internet connection and try again"
-    
-    labelNoNetwork.translatesAutoresizingMaskIntoConstraints = false
-    
-    labelNoNetwork.textColor = .black
-    labelNoNetwork.numberOfLines = 0
-    labelNoNetwork.lineBreakMode = .byWordWrapping
-    labelNoNetwork.font = UIFont.preferredFont(forTextStyle: .body)
-    labelNoNetwork.textAlignment = .center
   }
   
   //Building view model for table view
   func getCanadaInfoViewModel() {
     activityIndicatorAlert()
-//    self.navigationItem.rightBarButtonItem = nil
-    if (self.checkForReachability()) {
+    if (!self.checkForReachability()) {
       
       self.canadaInfoViewModel.fetchCanadaDetailData { [weak self]result in
         DispatchQueue.main.async { [weak self] in
@@ -173,8 +178,8 @@ class CanadaDescriptionListViewController: UIViewController {
     self.tblViewDescriptionList.translatesAutoresizingMaskIntoConstraints = false
     self.tblViewDescriptionList.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     self.tblViewDescriptionList.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    self.tblViewDescriptionList.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-    self.tblViewDescriptionList.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+    self.tblViewDescriptionList.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    self.tblViewDescriptionList.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     
     //Register cell for the tableview
     self.tblViewDescriptionList.register(CanadaDetailsTableViewCell.self, forCellReuseIdentifier: kReuseCellId)

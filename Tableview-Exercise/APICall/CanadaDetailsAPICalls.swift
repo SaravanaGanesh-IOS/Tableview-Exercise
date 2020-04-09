@@ -20,7 +20,7 @@ final class CanadaDetailsAPICalls: NSObject {
   
   /// Getting get canada info details from the Url using URLSession
   /// BaseURL - https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json
-  /// - Parameter completionHandler: returns Dictionary
+  /// - Parameter completionHandler: returns Result<Data, Error>
   
   func getCanadaInfo(completionHandler: @escaping (Result<Data, Error>) -> Void) {
     //Setting up URL Request

@@ -31,7 +31,7 @@ extension CanadaInfoListViewModel {
       guard let self = self else { return }
       switch result {
       case .failure(let error):
-        print("failure", error)
+        completionHandler(.failure(error))
         break
       case .success(let data):
         do {
@@ -45,7 +45,7 @@ extension CanadaInfoListViewModel {
           }
           completionHandler(.success(try decoder.decode(CanadaInfoDataSource.self, from: data)))
         } catch {
-          
+          completionHandler(.failure(error))
         }
         break
       }
